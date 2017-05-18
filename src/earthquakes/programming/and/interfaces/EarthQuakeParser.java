@@ -106,17 +106,16 @@ public class EarthQuakeParser {
 
 	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException{
 		/*EarthQuakeParser xp = new EarthQuakeParser();
-		//String source = "data/2.5_week.atom";
-		String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
+		String source = "data/nov20quakedata.atom";
+		//String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
 		ArrayList<QuakeEntry> list  = xp.read(source);
 		Collections.sort(list);
 		for(QuakeEntry loc : list){
 			System.out.println(loc);
 		}
-		System.out.println("# quakes = "+list.size());
-                */
-            ClosestQuakes quake = new ClosestQuakes();
-            quake.findClosestQuakes();
+		System.out.println("# quakes = "+list.size());*/
+            EarthQuakeClient ec = new EarthQuakeClient();
+            ec.closeToMe();
 		
 	}
 }
