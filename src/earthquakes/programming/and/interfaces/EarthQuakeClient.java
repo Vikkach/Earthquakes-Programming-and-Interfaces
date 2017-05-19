@@ -32,6 +32,31 @@ public class EarthQuakeClient {
 
         return answer;
     }
+    
+    public ArrayList<QuakeEntry> filterByDepth(ArrayList<QuakeEntry> quakeData, double minDepth, double maxDepth){
+        ArrayList<QuakeEntry> answer = new ArrayList<>();
+        for(QuakeEntry entry : quakeData){
+            if (entry.getDepth() > minDepth && entry.getDepth() < maxDepth){
+                answer.add(entry);
+            }
+        }
+        return answer;
+    }
+    
+    public void quakesOfDepth(){
+        EarthQuakeParser parser = new EarthQuakeParser();
+        //String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
+        String source = "data/nov20quakedatasmall.atom";
+        ArrayList<QuakeEntry> list = parser.read(source);
+        System.out.println("read data for " + list.size() + " quakes");
+        double minDepth = -10000.0;
+        double maxDepth = -5000.0;
+        ArrayList<QuakeEntry> filteredList = filterByDepth(list, minDepth, maxDepth);
+        for(QuakeEntry entry : filteredList){
+            System.out.println(entry.getDepth() + " " + entry.getMagnitude() + " " + entry.getInfo());
+        }
+        System.out.println("Found " + filteredList.size() + " quakes that match that criteria");
+    }
 
     public void dumpCSV(ArrayList<QuakeEntry> list) {
         System.out.println("Latitude,Longitude,Magnitude,Info");
@@ -73,7 +98,7 @@ public class EarthQuakeClient {
         Location city =  new Location(38.17, -118.82);
         ArrayList<QuakeEntry> filteredList = filterByDistanceFrom(list, distMax, city);
         for(QuakeEntry entry : filteredList){
-            System.out.println(entry + entry.getInfo());
+            System.out.println(entry.getInfo());
         }
         System.out.println("Found " + filteredList.size() + " quakes that match that criteria");
 

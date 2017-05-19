@@ -115,7 +115,7 @@ public class EarthQuakeParser {
 		}
 		System.out.println("# quakes = "+list.size());*/
             EarthQuakeClient ec = new EarthQuakeClient();
-            ec.closeToMe();
+            ec.quakesOfDepth();
 		
 	}
 }
