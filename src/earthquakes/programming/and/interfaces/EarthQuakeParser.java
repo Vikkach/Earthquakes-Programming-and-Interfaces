@@ -115,7 +115,7 @@ public class EarthQuakeParser {
 		}
 		System.out.println("# quakes = "+list.size());*/
             EarthQuakeClient2 ec = new EarthQuakeClient2();
-            ec.quakesWithFilter();
+            ec.testMatchAllFilter();
             //ClosestQuakes cq = new ClosestQuakes();
             //cq.findClosestQuakes();
             //LargestQuakes lq = new LargestQuakes();

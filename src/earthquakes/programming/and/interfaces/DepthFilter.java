@@ -24,4 +24,8 @@ public class DepthFilter implements Filter{
         return qe.getDepth() >= depthMin && qe.getDepth() <= depthMax; 
     } 
     
+    public String getName(){
+        return "Depth";
+    }
+    
 }

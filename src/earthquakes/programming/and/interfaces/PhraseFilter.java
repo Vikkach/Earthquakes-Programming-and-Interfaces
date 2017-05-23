@@ -35,6 +35,8 @@ public class PhraseFilter implements Filter{
         return containsState;
     }
     
-    
+    public String getName(){
+        return "Phrase";
+    }
     
 }

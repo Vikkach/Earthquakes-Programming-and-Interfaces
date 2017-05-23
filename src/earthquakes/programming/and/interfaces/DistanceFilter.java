@@ -21,7 +21,11 @@ public class DistanceFilter implements Filter{
 
     @Override
     public boolean satisfies(QuakeEntry qe) { 
-        return qe.getLocation().distanceTo(location) < distanceMax; 
+        return qe.getLocation().distanceTo(location) <= distanceMax; 
     } 
+    
+    public String getName(){
+        return "Distance";
+    }
     
 }

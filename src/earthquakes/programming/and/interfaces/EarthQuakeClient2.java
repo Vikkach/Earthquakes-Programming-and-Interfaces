@@ -59,5 +59,51 @@ public class EarthQuakeClient2 {
                 qe.getInfo());
         }
     }
+    
+    public void testMatchAllFilter(){
+         EarthQuakeParser parser = new EarthQuakeParser(); 
+        //String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
+        String source = "data/nov20quakedatasmall.atom";
+        ArrayList<QuakeEntry> list  = parser.read(source);
+        /*for (QuakeEntry qe : list){
+            System.out.println(qe);
+        }*/
+        System.out.println("read data for "+list.size()+" quakes");
+        MatchAllFilter maf = new MatchAllFilter();
+        Filter fMagn = new MagnitudeFilter(0.0, 2.0);
+        maf.addFilter(fMagn);
+        Filter fDepth = new DepthFilter(-100000.0, -10000.0);
+        maf.addFilter(fDepth);
+        Filter fPhrase = new PhraseFilter("any", "a");
+        maf.addFilter(fPhrase);
+        ArrayList<QuakeEntry> filteredList  = filter(list, maf);
+        for (QuakeEntry qe : filteredList){
+            System.out.println(qe);
+        }
+        System.out.println("Filters used are:" + maf.getName());
+    }
+    
+    public void testMatchAllFilter2(){
+        EarthQuakeParser parser = new EarthQuakeParser(); 
+        //String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
+        String source = "data/nov20quakedatasmall.atom";
+        ArrayList<QuakeEntry> list  = parser.read(source);
+        /*for (QuakeEntry qe : list){
+            System.out.println(qe);
+        }*/
+        System.out.println("read data for "+list.size()+" quakes");
+        MatchAllFilter maf = new MatchAllFilter();
+        Filter fMagn = new MagnitudeFilter(0.0, 3.0);
+        maf.addFilter(fMagn);
+        Location city = new Location(36.1314, -95.9372);
+        Filter fDistance = new DistanceFilter(city, 10000000);
+        maf.addFilter(fDistance);
+        Filter fPhrase = new PhraseFilter("any", "Ca");
+        maf.addFilter(fPhrase);
+        ArrayList<QuakeEntry> filteredList  = filter(list, maf);
+        for (QuakeEntry qe : filteredList){
+            System.out.println(qe);
+        }
+    }
 
 }
