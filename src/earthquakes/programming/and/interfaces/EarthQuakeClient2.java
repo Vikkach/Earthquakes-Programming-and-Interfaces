@@ -1,3 +1,5 @@
+package earthquakes.programming.and.interfaces;
+
 import java.util.*;
 import edu.duke.*;
 
@@ -7,7 +9,7 @@ public class EarthQuakeClient2 {
     }
 
     public ArrayList<QuakeEntry> filter(ArrayList<QuakeEntry> quakeData, Filter f) { 
-        ArrayList<QuakeEntry> answer = new ArrayList<QuakeEntry>();
+        ArrayList<QuakeEntry> answer = new ArrayList<>();
         for(QuakeEntry qe : quakeData) { 
             if (f.satisfies(qe)) { 
                 answer.add(qe); 
@@ -23,10 +25,16 @@ public class EarthQuakeClient2 {
         String source = "data/nov20quakedatasmall.atom";
         ArrayList<QuakeEntry> list  = parser.read(source);         
         System.out.println("read data for "+list.size()+" quakes");
-
-        Filter f = new MinMagFilter(4.0); 
-        ArrayList<QuakeEntry> m7  = filter(list, f); 
-        for (QuakeEntry qe: m7) { 
+        //Filter fMagn = new MagnitudeFilter(4.0, 5.0);
+        //ArrayList<QuakeEntry> filteredByMagn  = filter(list, fMagn); 
+        //Filter fDepth = new DepthFilter(-35000.0, -12000.0);
+        //ArrayList<QuakeEntry> filteredByDepth  = filter(filteredByMagn, fDepth); 
+        Location city = new Location(35.42, 139.43);
+        Filter fDistance = new DistanceFilter(city, 10000000);
+        ArrayList<QuakeEntry> filteredByDistance  = filter(list, fDistance); 
+        Filter fPhrase = new PhraseFilter("end", "Japan");
+        ArrayList<QuakeEntry> filteredByPhrase  = filter(filteredByDistance, fPhrase); 
+        for (QuakeEntry qe: filteredByPhrase) { 
             System.out.println(qe);
         } 
     }

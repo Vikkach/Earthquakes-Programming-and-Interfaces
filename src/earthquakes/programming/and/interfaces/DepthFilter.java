@@ -9,6 +9,19 @@ package earthquakes.programming.and.interfaces;
  *
  * @author Виктория
  */
-public class DepthFilter {
+public class DepthFilter implements Filter{
+    
+    private double depthMin; 
+    private double depthMax;
+    
+    public DepthFilter(double min, double max) { 
+        depthMin = min;
+        depthMax = max;
+    } 
+
+    @Override
+    public boolean satisfies(QuakeEntry qe) { 
+        return qe.getDepth() >= depthMin && qe.getDepth() <= depthMax; 
+    } 
     
 }

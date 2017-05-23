@@ -9,6 +9,19 @@ package earthquakes.programming.and.interfaces;
  *
  * @author Виктория
  */
-public class MagnitudeFilter {
+public class MagnitudeFilter implements Filter{
+    
+     private double magMin; 
+     private double magMax;
+    
+    public MagnitudeFilter(double min, double max) { 
+        magMin = min;
+        magMax = max;
+    } 
+
+    @Override
+    public boolean satisfies(QuakeEntry qe) { 
+        return qe.getMagnitude() >= magMin && qe.getMagnitude() <= magMax; 
+    } 
     
 }

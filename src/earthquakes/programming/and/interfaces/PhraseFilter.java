@@ -9,6 +9,32 @@ package earthquakes.programming.and.interfaces;
  *
  * @author Виктория
  */
-public class PhraseFilter {
+public class PhraseFilter implements Filter{
+    
+    private String wherePhrase;
+    private String phrase;
+    
+    public PhraseFilter(String where, String phr){
+        wherePhrase = where;
+        phrase = phr;
+    }
+    
+    @Override
+     public boolean satisfies(QuakeEntry qe) { 
+         String title = qe.getInfo();
+         boolean containsState = false;
+            if (wherePhrase.equals("start") && title.substring(0, phrase.length()).equals(phrase)) {
+                containsState = true;
+            }
+            if (wherePhrase.equals("end") && title.substring(title.length() - phrase.length(), title.length()).equals(phrase)) {
+                containsState = true;
+            }
+            if (wherePhrase.equals("any") && title.contains(phrase)) {
+                containsState = true;
+            }
+        return containsState;
+    }
+    
+    
     
 }

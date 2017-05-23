@@ -114,11 +114,11 @@ public class EarthQuakeParser {
 			System.out.println(loc);
 		}
 		System.out.println("# quakes = "+list.size());*/
-            //EarthQuakeClient ec = new EarthQuakeClient();
-            //ec.quakesByPhrase();
+            EarthQuakeClient2 ec = new EarthQuakeClient2();
+            ec.quakesWithFilter();
             //ClosestQuakes cq = new ClosestQuakes();
             //cq.findClosestQuakes();
-            LargestQuakes lq = new LargestQuakes();
-            lq.findLargestQuakes();
+            //LargestQuakes lq = new LargestQuakes();
+            //lq.findLargestQuakes();
 	}
 }

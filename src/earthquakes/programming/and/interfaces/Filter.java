@@ -1,3 +1,5 @@
+package earthquakes.programming.and.interfaces;
+
 
 /**
  * Write a description of interface Filter here.

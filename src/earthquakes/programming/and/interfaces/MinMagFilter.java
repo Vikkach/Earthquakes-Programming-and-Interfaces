@@ -1,3 +1,5 @@
+package earthquakes.programming.and.interfaces;
+
 
 /**
  * Write a description of class MinMaxFilter here.
@@ -13,6 +15,7 @@ public class MinMagFilter implements Filter
         magMin = min;
     } 
 
+    @Override
     public boolean satisfies(QuakeEntry qe) { 
         return qe.getMagnitude() >= magMin; 
     } 
