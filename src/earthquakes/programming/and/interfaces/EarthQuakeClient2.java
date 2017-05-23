@@ -22,21 +22,22 @@ public class EarthQuakeClient2 {
     public void quakesWithFilter() { 
         EarthQuakeParser parser = new EarthQuakeParser(); 
         //String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
-        String source = "data/nov20quakedatasmall.atom";
+        String source = "data/nov20quakedata.atom";
         ArrayList<QuakeEntry> list  = parser.read(source);         
         System.out.println("read data for "+list.size()+" quakes");
-        //Filter fMagn = new MagnitudeFilter(4.0, 5.0);
-        //ArrayList<QuakeEntry> filteredByMagn  = filter(list, fMagn); 
-        //Filter fDepth = new DepthFilter(-35000.0, -12000.0);
-        //ArrayList<QuakeEntry> filteredByDepth  = filter(filteredByMagn, fDepth); 
-        Location city = new Location(35.42, 139.43);
-        Filter fDistance = new DistanceFilter(city, 10000000);
-        ArrayList<QuakeEntry> filteredByDistance  = filter(list, fDistance); 
-        Filter fPhrase = new PhraseFilter("end", "Japan");
-        ArrayList<QuakeEntry> filteredByPhrase  = filter(filteredByDistance, fPhrase); 
-        for (QuakeEntry qe: filteredByPhrase) { 
+        Filter fMagn = new MagnitudeFilter(4.0, 5.0);
+        ArrayList<QuakeEntry> filteredByMagn  = filter(list, fMagn); 
+        Filter fDepth = new DepthFilter(-35000.0, -12000.0);
+        ArrayList<QuakeEntry> filteredByDepth  = filter(filteredByMagn, fDepth); 
+        //Location city = new Location(35.42, 139.43);
+        //Filter fDistance = new DistanceFilter(city, 10000000);
+        //ArrayList<QuakeEntry> filteredByDistance  = filter(list, fDistance); 
+        //Filter fPhrase = new PhraseFilter("end", "Japan");
+        //ArrayList<QuakeEntry> filteredByPhrase  = filter(filteredByDistance, fPhrase); 
+        for (QuakeEntry qe: filteredByDepth) { 
             System.out.println(qe);
         } 
+        System.out.println(filteredByDepth.size());
     }
 
     public void createCSV() {
@@ -63,7 +64,7 @@ public class EarthQuakeClient2 {
     public void testMatchAllFilter(){
          EarthQuakeParser parser = new EarthQuakeParser(); 
         //String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
-        String source = "data/nov20quakedatasmall.atom";
+        String source = "data/nov20quakedata.atom";
         ArrayList<QuakeEntry> list  = parser.read(source);
         /*for (QuakeEntry qe : list){
             System.out.println(qe);
@@ -80,13 +81,14 @@ public class EarthQuakeClient2 {
         for (QuakeEntry qe : filteredList){
             System.out.println(qe);
         }
+        System.out.println(filteredList.size());
         System.out.println("Filters used are:" + maf.getName());
     }
     
     public void testMatchAllFilter2(){
         EarthQuakeParser parser = new EarthQuakeParser(); 
         //String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
-        String source = "data/nov20quakedatasmall.atom";
+        String source = "data/nov20quakedata.atom";
         ArrayList<QuakeEntry> list  = parser.read(source);
         /*for (QuakeEntry qe : list){
             System.out.println(qe);
@@ -104,6 +106,7 @@ public class EarthQuakeClient2 {
         for (QuakeEntry qe : filteredList){
             System.out.println(qe);
         }
+        System.out.println(filteredList.size());
     }
 
 }
