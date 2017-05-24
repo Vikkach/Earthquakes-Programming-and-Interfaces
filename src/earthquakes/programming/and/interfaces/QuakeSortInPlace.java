@@ -77,6 +77,27 @@ public class QuakeSortInPlace {
         }
     }
     
+    public boolean checkInSortedOrder(ArrayList<QuakeEntry> quakes){
+        boolean state = true;
+        for (int i = 0; i < quakes.size() - 1; i++){
+            if (quakes.get(i).getMagnitude() > quakes.get(i + 1).getMagnitude()){
+                state = false;
+            }
+        }
+        return state;
+    }
+    
+    public void sortByMagnitudeWithBubbleSortWithCheck(ArrayList<QuakeEntry> in){
+        int passes = 0;
+        for (int i = 0; i < in.size() - 1; i++){
+            onePassBubbleSort(in, i);
+            passes++;
+            boolean state = checkInSortedOrder(in);
+            if (state = true){
+                break;
+            }
+        }
+    }
     public void testSort() {
         EarthQuakeParser parser = new EarthQuakeParser(); 
         //String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
