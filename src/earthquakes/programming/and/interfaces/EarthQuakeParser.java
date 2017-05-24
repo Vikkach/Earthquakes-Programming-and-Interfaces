@@ -111,8 +111,10 @@ public class EarthQuakeParser {
             System.out.println(loc);
         }
         System.out.println("# quakes = "+list.size());*/
-        EarthQuakeClient2 ec = new EarthQuakeClient2();
-        ec.testMatchAllFilter();
+        //EarthQuakeClient2 ec = new EarthQuakeClient2();
+        //ec.testMatchAllFilter();
+        QuakeSortInPlace sort = new QuakeSortInPlace();
+        sort.testSort();
 
     }
     
