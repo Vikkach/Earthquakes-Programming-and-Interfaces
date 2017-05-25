@@ -1,6 +1,5 @@
 package earthquakes.programming.and.interfaces;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -13,6 +12,7 @@ import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
 public class EarthQuakeParser {
+
     public EarthQuakeParser() {
         // TODO Auto-generated constructor stub
     }
@@ -27,10 +27,9 @@ public class EarthQuakeParser {
             //Document document = builder.parse("http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.atom");
             Document document = null;
 
-            if (source.startsWith("http")){
+            if (source.startsWith("http")) {
                 document = builder.parse(source);
-            }
-            else {
+            } else {
                 document = builder.parse(new File(source));
             }
             //Document document = builder.parse("http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom");
@@ -39,7 +38,7 @@ public class EarthQuakeParser {
 
             ArrayList<QuakeEntry> list = new ArrayList<QuakeEntry>();
 
-            for(int k=0; k < nodeList.getLength(); k++){
+            for (int k = 0; k < nodeList.getLength(); k++) {
                 Node node = nodeList.item(k);
 
                 if (node.getNodeName().equals("entry")) {
@@ -58,64 +57,59 @@ public class EarthQuakeParser {
                         lat = Double.parseDouble(args[0]);
                         lon = Double.parseDouble(args[1]);
                     }
-                    if (t2 != null){
+                    if (t2 != null) {
                         String s2 = t2.item(0).getChildNodes().item(0).getNodeValue();
 
-                        String mags = s2.substring(2,s2.indexOf(" ",2));
+                        String mags = s2.substring(2, s2.indexOf(" ", 2));
                         if (mags.contains("?")) {
                             mag = 0.0;
                             System.err.println("unknown magnitude in data");
-                        }
-                        else {
+                        } else {
                             mag = Double.parseDouble(mags);
                             //System.out.println("mag= "+mag);
                         }
-                        int sp = s2.indexOf(" ",5);
-                        title = s2.substring(sp+1);
-                        if (title.startsWith("-")){
+                        int sp = s2.indexOf(" ", 5);
+                        title = s2.substring(sp + 1);
+                        if (title.startsWith("-")) {
                             int pos = title.indexOf(" ");
-                            title = title.substring(pos+1);
+                            title = title.substring(pos + 1);
                         }
                     }
-                    if (t3 != null){
+                    if (t3 != null) {
                         String s2 = t3.item(0).getChildNodes().item(0).getNodeValue();
                         depth = Double.parseDouble(s2);
                     }
-                    QuakeEntry loc = new QuakeEntry(lat,lon,mag,title,depth);
+                    QuakeEntry loc = new QuakeEntry(lat, lon, mag, title, depth);
                     list.add(loc);
                 }
 
             }
             return list;
-        }
-        catch (ParserConfigurationException pce){
+        } catch (ParserConfigurationException pce) {
             System.err.println("parser configuration exception");
-        }
-        catch (SAXException se){
+        } catch (SAXException se) {
             System.err.println("sax exception");
-        }
-        catch (IOException ioe){
+        } catch (IOException ioe) {
             System.err.println("ioexception");
         }
         return null;
     }
 
-    public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException{
+    public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
         /*EarthQuakeParser xp = new EarthQuakeParser();
-        //String source = "data/2.5_week.atom";
-        //String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
-        String source = "data/nov20quakedata.atom";
-        ArrayList<QuakeEntry> list  = xp.read(source);
-        Collections.sort(list);
-        for(QuakeEntry loc : list){
-            System.out.println(loc);
-        }
-        System.out.println("# quakes = "+list.size());*/
+         //String source = "data/2.5_week.atom";
+         //String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
+         String source = "data/nov20quakedata.atom";
+         ArrayList<QuakeEntry> list  = xp.read(source);
+         Collections.sort(list);
+         for(QuakeEntry loc : list){
+         System.out.println(loc);
+         }
+         System.out.println("# quakes = "+list.size());*/
         //EarthQuakeClient2 ec = new EarthQuakeClient2();
         //ec.testMatchAllFilter();
         QuakeSortInPlace sort = new QuakeSortInPlace();
         sort.testSort();
 
     }
-    
 }
